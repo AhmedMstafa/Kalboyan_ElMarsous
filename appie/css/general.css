@@ -1,0 +1,113 @@
+/* 
+--- 01 TYPOGRAPHY SYSTEM
+
+- Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Font weights
+Default: 400
+medium: 500
+Semi-bold: 600
+Bold: 700
+
+- Line heights
+Default: 1
+Small: 1.05
+Medium: 1.2
+Large: 1.8
+Parapgraph default: 1.6
+
+- Letter spacing
+- 0.5px
+- 0.75px
+
+-- 02 Colors
+#0e1133
+#ff3e66
+#eef1f6
+
+- Primary: 
+
+- Tints: 
+#e6385c
+#b7b8c2
+#B3C3F2
+#3e415c
+
+- Shades: 
+
+- Accents: 
+- Greys: 
+#6f6f6f  ( lightest grey allowed on #fdf2e9 )
+#555
+#333
+#767676 ( lightest grey allowed on #fff )
+
+
+--- 05 Shadows
+
+0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+
+
+--- 06 Border-Radius
+Default: 9px
+Medium: 12px
+
+--- 07 Witespace
+
+
+
+
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  color: #0B0F26;
+}
+
+/*********************************/
+/* GENEEAL  REUSABLE  COMPONENTS*/
+/*******************************/
+
+.container {
+  max-width: 130rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+
+.grid {
+  display: grid;
+}
+
+.grid--2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--4-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+.margin-b {
+  margin-bottom: 9.6rem;
+}
