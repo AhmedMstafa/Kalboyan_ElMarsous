@@ -522,7 +522,7 @@ header {
 }
 
 .active-col {
-  box-shadow: 0px 2rem 2rem 1rem #eef1f6;
+  box-shadow: 0px 2.4rem 4.2rem rgba(255, 62, 101, 0.095);
   width: 90%;
   padding: 5rem 4rem;
   display: flex;
@@ -530,8 +530,13 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 6px;
 }
 
+.active-col:nth-child(3) {
+  box-shadow: 0px 2.4rem 4.2rem rgba(255, 86, 34, 0.090);
+
+}
 
 .active-col h3 {
   font-size: 3.6rem;
@@ -688,7 +693,7 @@ header {
   padding: 1.2rem;
   border-radius: 50%;
   color: #6f6f6f;
-  border: 1px solid #eef1f6;
+  border: 2px solid #eef1f6;
   margin-left: 1rem;
   cursor: pointer;
   transition: all 0.3s;
@@ -795,4 +800,201 @@ header {
   font-size: 2rem;
   text-align: left;
   line-height: 0.8;
+}
+
+/*****************************/
+/*          Pricing         */
+/***************************/
+
+
+.pricing-section {
+  margin-top: 9.6rem;
+  margin-bottom: 9.6rem;
+  padding: 0 9.6rem;
+}
+
+.pricing-section .hedding-title {
+  text-align: center;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 2rem;
+}
+
+.pricing-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+}
+
+.every-box {
+  grid-column: 1 / -1;
+  justify-self: center;
+  align-self: center;
+  border: 2px solid #f0f1f7;
+  border-radius: 10rem;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  transition: .5s;
+}
+
+
+
+.every-box span {
+  padding: 1rem 2rem;
+  border-radius: 50rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.every-box span:first-child {
+  background-color: #ff3e66;
+  color: #fff;
+}
+
+.every-box span:last-child {
+  color: #6f6f6f;
+}
+
+
+.plan-box {
+  padding: 3rem;
+  border: 2px solid #f0f1f7;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-box:nth-child(3) .plan-box::before {
+  content: "Most popular";
+  position: absolute;
+  right: -1rem;
+  top: 2rem;
+  background-color: #2a6df5;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: .5rem 2rem .5rem 1rem;
+  border-radius: 10rem;
+}
+
+.plan-box span {
+  font-size: 2rem;
+  padding: 1rem 0;
+  font-weight: 600;
+}
+
+.plan-box p:nth-of-type(1) {
+  font-size: 1.8rem;
+  color: #6f6f6f;
+}
+
+.plan-box sup {
+  font-size: 2rem;
+  color: initial;
+
+}
+
+.plan-box strong {
+  font-size: 4rem;
+  color: initial;
+}
+
+.plan-box p:nth-of-type(2) {
+  font-size: 1.2rem;
+  color: #6f6f6f;
+}
+
+.plan-box hr {
+  height: 1px;
+  background-color: #f0f1f7;
+  border: none;
+}
+
+
+.box-options li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: initial;
+}
+
+.box-options li span {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+
+.pricing-icon {
+  width: 2rem;
+  height: 2rem;
+  padding: .2rem;
+  border-radius: 50%;
+  color: #2a6df5;
+  background-color: #eef4fe;
+}
+
+.pricing-box:nth-child(3) .pricing-icon {
+  color: #8cddab;
+  background-color: #effaf3;
+}
+
+
+.pricing-link {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.plan-box a:link,
+.plan-box a:visited {
+  text-decoration: none;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 1.5rem 3rem;
+  border-radius: 5rem;
+  color: inherit;
+  transition: all 0.5s;
+  border: 2px solid #eef1f6;
+  cursor: pointer;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+
+.pricing-link:hover a:link,
+.pricing-link:hover a:visited {
+  background-color: #ff3e66;
+  color: #fff;
+  border-color: #ff3e66;
+}
+
+.pricing-box:nth-child(3) a:link,
+.pricing-box:nth-child(3) a:visited {
+  border: 2px solid #ff3e66;
+  background-color: #ff3e66;
+  color: #fff;
+}
+
+.pricing-box:nth-child(3) .plan-box {
+  box-shadow: 0px 2.4rem 4.2rem rgba(255, 62, 101, 0.095);
+  border-top: 3px solid #ff3e66;
+  transition: .3s;
+}
+
+.pricing-box:nth-child(3):hover .plan-box {
+  box-shadow: 0px 3.2rem 6.4rem rgba(255, 62, 101, 0.06);
+  transform: translateY(-1.2rem);
 }
