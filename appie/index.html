@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find the best application in the appie">
+  <meta name="keywords" content="appie.">
+  <meta name="author" content="Ahmed Mostafa">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,58 +24,69 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 
+  <!-- Js File -->
+  <script defer src="js/script.js"></script>
+
+  <!-- polyfill -->
+  <script defer src=" https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+
   <title>appie</title>
 </head>
 <!-- Start Header -->
+<!-- nav-open -->
 <header class="header">
-  <div class="container">
-    <div class="header-box">
-      <a class="logo" href="#">
-        <img src="img/logo.png" alt="logo" />
-      </a>
-      <nav class="main-nav">
-        <ul class="main-nav-list">
-          <li><a class="nav-link" href="#">Home </a><span><ion-icon class="icon-nav"
-                name="chevron-down-outline"></ion-icon></span></li>
-          <li><a class="nav-link" href="#">Service </a></li>
-          <li><a class="nav-link" href="#">Pages </a><span><ion-icon class="icon-nav"
-                name="chevron-down-outline"></ion-icon></span></li>
-          <li><a class="nav-link" href="#">News </a><span><ion-icon class="icon-nav"
-                name="chevron-down-outline"></ion-icon></span></li>
-          <li><a class="nav-link" href="#">contact </a></li>
-        </ul>
-      </nav>
-      <div class="btn-nav">
-        <a class="btn-nav-link" href="#">Get Started</a>
-      </div>
+  <div class="header-box container ">
+    <a class="logo" href="#">
+      <img src="img/logo.png" alt="appie logo" />
+    </a>
+    <nav class="main-nav">
+      <ul class="main-nav-list">
+        <li><a class="nav-link" href="#"><span>Home </span><ion-icon class="icon-nav"
+              name="chevron-down-outline"></ion-icon></a></li>
+        <li><a class="nav-link" href="#service">Service </a></li>
+        <li><a class="nav-link" href="#pages"><span>Pages </span><ion-icon class="icon-nav"
+              name="chevron-down-outline"></ion-icon></a></li>
+        <li><a class="nav-link" href="#news"><span>News </span> <ion-icon class="icon-nav"
+              name="chevron-down-outline"></ion-icon></a></li>
+        <li><a class="nav-link" href="#contact">contact </a></li>
+      </ul>
+    </nav>
+    <div class="btn-nav">
+      <button class="btn-get-started">
+        <a class="btn-link" href="#started">Get Started</a>
+      </button>
+      <button class="btn-mobile-nav">
+        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+      </button>
     </div>
   </div>
 </header>
 <!-- End Header -->
 
-<!-- Start Main -->
+<!-- Start Main  -->
 <main>
   <!-- Start Hero Section -->
-  <section class="hero-scetion margin-b">
+  <section class="hero-scetion " id="home">
     <div class="hero">
       <div class="hero-text-box">
         <h1 class="heading-primary">
-          Ready to launch<br> your app in one,<br><strong>Application</strong>
+          Ready to launch your app in one, <strong>Application</strong>
         </h1>
         <form action="" class="hero-form">
           <label class="label-find" for="find">Find the best application in the appie.</label>
           <div class="input-botton">
             <ion-icon class="email-icon" name="mail-outline"></ion-icon>
             <input class="find" id="find" type="email" placeholder="info@appie.com" name="email">
-            <input class="in-submit" type="submit" value="&#10140;">
+            <button class="in-submit" type="submit"><ion-icon name="arrow-forward-sharp"></ion-icon></button>
           </div>
         </form>
         <div class="feedback-box">
           <div class="customers-img-box">
-            <img src="img/people/customer-1.jpg" alt="customer image">
-            <img src="img/people/customer-2.jpg" alt="customer image">
-            <img src="img/people/customer-5.jpg" alt="customer image">
-            <img src="img/people/customer-4.jpg" alt="customer image">
+            <img src="img/people/customer-1.jpg" alt="customer image" />
+            <img src="img/people/customer-2.jpg" alt="customer image" />
+            <img src="img/people/customer-5.jpg" alt="customer image" />
+            <img src="img/people/customer-4.jpg" alt="customer image" />
           </div>
           <div class="feedback-text">
             <p><strong>30K</strong>Feedback</p>
@@ -86,11 +100,11 @@
   </section>
   <!-- End Hero Section -->
 
-  <!-- Start Section How -->
-  <section class="how-section">
+  <!-- Start How Section -->
+  <section class="how-section " id="service">
     <div class="container">
       <div class="hedding flex-between">
-        <div class="hedding-title">
+        <div class="heading-secondary">
           <h2>How does it work</h2>
           <p>The full monty spiffing good time no biggie cack grub fantastic.</p>
         </div>
@@ -146,43 +160,46 @@
           <a class="feature-link" href="#">Read Mor&#10140</a>
         </div>
       </div>
-      <div class="about margin-b">
-        <div class="about-col">
-          <div class="box-img">
-            <div class="cut-img">
-              <img src="img/about-thumb.png" alt="">
+  </section>
+  <!-- End How Section -->
+
+  <!-- Start About Section -->
+  <section class="about-section">
+    <div class="container">
+      <div class="about  grid grid--2-cols">
+        <div class="img-box">
+          <img src="img/about-thumb.png" alt="image about appie">
+        </div>
+        <div class="text-box grid grid--2-cols">
+          <div class="text-head">
+            <span>Marketing</span>
+            <h3 class="make">Make a lasting <br> impression with appie.</h3>
+            <p class="jolly">Jolly good quaint james bond victoria sponge happy days cars arse over blatant.</p>
+          </div>
+          <div class="check-text">
+            <ion-icon class="about-icon" name="checkmark-outline"></ion-icon>
+            <div class="text-group">
+              <h5>Carefully designed</h5>
+              <p>Mucker plastered bugger all mate morish are</p>
             </div>
           </div>
-          <div class="about-text">
-            <div class="text-box-top">
-              <h3>Marketing</h3>
-              <h4>Make a lasting <br> impression with appie.</h4>
-              <p>Jolly good quaint james bond victoria sponge happy days cars arse over blatant.</p>
-            </div>
-            <div class="text-box-bottom">
-              <div class="about-last">
-                <span><ion-icon name="checkmark-sharp"></ion-icon></span>
-                <div>
-                  <h5>Carefully designed</h5>
-                  <p>Mucker plastered bugger all mate morish are</p>
-                </div>
-              </div>
-              <div class="about-last"><span><ion-icon name="checkmark-sharp"></ion-icon></span>
-                <div>
-                  <h5> choose aApp</h5>
-                  <p>Mucker plastered bugger all mate morish are</p>
-                </div>
-              </div>
+          <div class="check-text">
+            <ion-icon class="about-icon" name="checkmark-outline"></ion-icon>
+            <div class="text-group">
+              <h5>Choose a App</h5>
+              <p>Mucker plastered bugger all mate morish are</p>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </section>
-  <!-- End Section How -->
+  <!-- End About Section -->
+
   <!-- Start Whereve Section -->
-  <section class="wherever margin-b">
+  <section class="wherever-section" id="pages">
     <div class="container">
-      <div class="hedding-title">
+      <div class="heading-secondary">
         <h2>Wherver you need <br> us the most</h2>
         <p>The full monty spiffing good time no biggie cack grub fantastic.</p>
       </div>
@@ -208,10 +225,11 @@
     </div>
   </section>
   <!-- End Whereve Section -->
+
   <!-- Start Active Section -->
-  <section class="active margin-b">
+  <section class="active-section" id="news">
     <div class="container">
-      <div class="hedding-title">
+      <div class="heading-secondary">
         <h2>How does it work</h2>
         <p>The full monty spiffing good time no biggie cack grub fantastic.</p>
       </div>
@@ -278,7 +296,7 @@
   <!-- End Active Section -->
 
   <!-- Start Download Section -->
-  <section class="download">
+  <section class="download-section">
     <div class="container">
       <div class="download-text">
         <span>Download Our App</span>
@@ -288,7 +306,7 @@
 
           <button class="download-btn">
             <ion-icon class="ios-icon" name="logo-apple"></ion-icon>
-            <p>Download for <strong>iOS</strong></p>
+            <p>Download for <strong>IOS</strong></p>
           </button>
           <button class="download-btn">
             <ion-icon class="android-icon" name="logo-google-playstore"></ion-icon>
@@ -300,10 +318,11 @@
     </div>
   </section>
   <!-- End Download Section -->
+
   <!-- Start Pricing Section -->
-  <section class="pricing-section">
+  <section class="pricing-section" id="started">
     <div class="container">
-      <div class="hedding-title">
+      <div class="heading-secondary center">
         <h2>Simple pricing for Everyone</h2>
         <p>The full monty spiffing good no biggie cack grub fantastic.</p>
       </div>
@@ -368,8 +387,160 @@
     </div>
   </section>
   <!-- End Pricing Section -->
+
+  <!-- Start testimonial Section -->
+  <section class="testimonial-setion container ">
+    <div class="testimonial grid ">
+      <div class="testimonial-left">
+        <img class="img-test" src="img/people/customer-1.jpg" alt="image riview">
+        <div class="review-box">
+          <div class="starts-box">
+            <ion-icon class="star" name="star"></ion-icon>
+            <ion-icon class="star" name="star"></ion-icon>
+            <ion-icon class="star" name="star"></ion-icon>
+            <ion-icon class="star" name="star"></ion-icon>
+            <ion-icon class="star" name="star"></ion-icon>
+          </div>
+          <p class="review-title">
+            (4.7) review
+          </p>
+        </div>
+      </div>
+      <div class="testimonial-right">
+        <p class="text-testimonial">Whay i say old chap that is spiffing chip shop such a fibber the bee's kness, the
+          wireless Richard fanfastic do one cracking goal pukka baking cakes starkers mush don't get shirty with me argy
+          bargy, I naff shimney pot blimey he lost his bottle cup.</p>
+        <div class="info-next">
+          <div class="person">
+            <p class="person-name"><strong>Hanson Deck</strong></p>
+            <p class="person-jop">Web developer</p>
+          </div>
+          <div class="testimonial-icons">
+            <ion-icon class="icon-left" name="arrow-back-sharp"></ion-icon>
+            <ion-icon class="icon-right" name="arrow-forward-sharp"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End testimonial Section -->
+
+  <!-- Start sponsers Section -->
+  <section class="sponsers-section">
+    <div class="container">
+      <div class="heading-secondary center">
+        <h2>Appie works best with your favorite platforms</h2>
+        <p>Join over 40,000 businesses world wide.</p>
+      </div>
+      <div class="sponsers">
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-1.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-2.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-3.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-4.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-5.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-6.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-7.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-8.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-9.png" alt="">
+        </div>
+        <div class="sp-img-box">
+          <img src="img/sponsers/sponser-10.png" alt="">
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <!-- End sponsers Section -->
 </main>
-<!-- End Main -->
+<!-- End Main  -->
+
+<!-- Start Footer -->
+<footer class="footer" id="contact">
+  <div class="container grid grid--4-cols">
+    <div class="logo-col">
+      <a class="logo" href="#">
+        <img src="img/logo.png" alt="appie logo" />
+      </a>
+      <p class="status">Appie wordpress is theme is the last theme you will ever have.</p>
+      <p><a class="read-footer" href="#"><span>Read More </span> <ion-icon class="read-more-icon"
+            name="arrow-forward-sharp"></ion-icon></a></p>
+      <ul class="social-links">
+        <li><a href="#"><img class="footer-link" src="img/icons/icons8-facebook.svg" alt="facebook"></a></li>
+        <li><a href="#"><img class="footer-link" src="img/icons/pinterest-logo.svg" alt="pinterest"></a></li>
+        <li><a href="#"><img class="footer-link" src="img/icons/logo-twitter.svg" alt="twitter"></a></li>
+        <li><a href="#"><img class="footer-link" src="img/icons/logo-linkedin.svg" alt="linkedin"></a></li>
+      </ul>
+    </div>
+    <nav class="nav-col">
+      <p class="footer-heading">Company</p>
+      <ul class="footer-nav">
+        <li><a class="footer-link" href="#">About Us</a></li>
+        <li><a class="footer-link" href="#">Service</a></li>
+        <li><a class="footer-link" href="#">Case Studies</a></li>
+        <li><a class="footer-link" href="#">Blog</a></li>
+        <li><a class="footer-link" href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <nav class="nav-col">
+      <p class="footer-heading">Support</p>
+      <ul class="footer-nav">
+        <li><a class="footer-link" href="#">Community</a></li>
+        <li><a class="footer-link" href="#">Resources</a></li>
+        <li><a class="footer-link" href="#">Faqs</a></li>
+        <li><a class="footer-link" href="#">Privecy Policy</a></li>
+        <li><a class="footer-link" href="#">Careers</a></li>
+      </ul>
+    </nav>
+    <nav class="get-in-col">
+      <p class="footer-heading">Get in Touch</p>
+      <address class="contacts">
+        <p>
+          <a class="footer-get" href="mailto:support@appie.com"><ion-icon class="get-icon"
+              name="mail-outline"></ion-icon><span>support@appie.com</span></a>
+          <br>
+          <a class="footer-get" href="tel:+(642)342-762-44"><ion-icon class="get-icon"
+              name="call-outline"></ion-icon><span>+(642)342 762 44</span></a>
+          <br>
+          <a class="footer-get"
+            href="https://www.google.com/maps/place/San+Francisco+Ave,+Brisbane,+CA+94005%D8%8C+%D8%A7%D9%84%D9%88%D9%84%D8%A7%D9%8A%D8%A7%D8%AA+%D8%A7%D9%84%D9%85%D8%AA%D8%AD%D8%AF%D8%A9%E2%80%AD/@37.6847696,-122.3924809,15z/data=!3m1!4b1!4m5!3m4!1s0x808f78df8035277b:0x263ead977fc9ae81!8m2!3d37.6847699!4d-122.4012142"><ion-icon
+              class="get-icon" name="location-outline"></ion-icon><span>442
+              Belle Terre St Floor 7, San Francisco, AV 4206</span></a>
+        </p>
+      </address>
+    </nav>
+  </div>
+  <div class="container sup-footer">
+    <div class="footer-btns">
+      <button class="dwnos"><ion-icon class="icon-dwnos" name="logo-apple"></ion-icon><span>Download for
+          IOS</span></button>
+      <button class="dwnand"><ion-icon class="icon-dwnand" name="logo-google-playstore"></ion-icon><span>Download for
+          Android</span></button>
+    </div>
+    <p class="copy">Copyright &copy; <span class="year">2021</span> Apple.All Rights reserved.</p>
+  </div>
+  <a class="up-arr" href="#">
+    <ion-icon class="up-arr-icon" name="arrow-up-sharp"></ion-icon>
+  </a>
+</footer>
+<!-- End Footer -->
+
 
 <body>
 
