@@ -23,22 +23,15 @@
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-
-  <!-- Js File -->
-  <script defer src="js/script.js"></script>
-
-  <!-- polyfill -->
-  <script defer src=" https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
-
   <title>appie</title>
 </head>
 <!-- Start Header -->
-<!-- nav-open -->
 <header class="header">
   <div class="header-box container ">
     <a class="logo" href="#">
       <img src="img/logo.png" alt="appie logo" />
     </a>
+    <input type="checkbox" id="ckd" class="checkbox-button">
     <nav class="main-nav">
       <ul class="main-nav-list">
         <li><a class="nav-link" href="#"><span>Home </span><ion-icon class="icon-nav"
@@ -55,11 +48,11 @@
       <button class="btn-get-started">
         <a class="btn-link" href="#started">Get Started</a>
       </button>
-      <button class="btn-mobile-nav">
-        <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
-        <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
-      </button>
     </div>
+    <label for="ckd" class="btn-mobile-nav">
+      <ion-icon class="icon-mobile-nav" name="menu-outline"></ion-icon>
+      <ion-icon class="icon-mobile-nav" name="close-outline"></ion-icon>
+    </label>
   </div>
 </header>
 <!-- End Header -->
@@ -77,7 +70,7 @@
           <label class="label-find" for="find">Find the best application in the appie.</label>
           <div class="input-botton">
             <ion-icon class="email-icon" name="mail-outline"></ion-icon>
-            <input class="find" id="find" type="email" placeholder="info@appie.com" name="email">
+            <input class="find" id="find" type="email" placeholder="info@appie.com" name="email" required>
             <button class="in-submit" type="submit"><ion-icon name="arrow-forward-sharp"></ion-icon></button>
           </div>
         </form>

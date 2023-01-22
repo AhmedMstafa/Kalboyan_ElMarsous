@@ -79,6 +79,11 @@ header {
 
 /* Mobile */
 
+.checkbox-button {
+  display: none;
+}
+
+
 .btn-nav {
   display: flex;
   gap: 1rem;
@@ -97,29 +102,16 @@ header {
   color: #333;
 }
 
+.btn-mobile-nav {
+  display: none;
+}
+
 .icon-mobile-nav[name="close-outline"] {
   display: none;
 }
 
 
-/* Sticky navigation */
-.sticky .header {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  padding-top: 0;
-  padding-bottom: 0;
-  background-color: rgba(255, 255, 255, 0.97);
-  z-index: 999;
-  height: 8rem;
-  box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
-}
 
-
-.sticky .hero-scetion {
-  margin-top: 9.6rem;
-}
 
 
 /***[ HOVER ]****/

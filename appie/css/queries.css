@@ -215,9 +215,31 @@
 
   /* mobile  */
 
+  .header-box {
+    gap: 1rem
+  }
+
+  .btn-nav {
+    margin-left: auto;
+  }
+
+
   .btn-mobile-nav {
     display: block;
   }
+
+  input[type="checkbox"]:checked~label .icon-mobile-nav[name="menu-outline"] {
+    display: none;
+  }
+
+
+
+  input[type="checkbox"]:checked~label .icon-mobile-nav[name="close-outline"] {
+    display: block;
+    position: relative;
+    z-index: 99999;
+  }
+
 
   .main-nav {
     background-color: rgba(255, 255, 255, 0.97);
@@ -226,11 +248,10 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 9998;
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
-
     opacity: 0;
     transition: var(--transtion-med);
     pointer-events: none;
@@ -238,7 +259,7 @@
     transform: translateX(100%);
   }
 
-  .nav-open .main-nav {
+  input[type="checkbox"]:checked+.main-nav {
     opacity: 1;
     pointer-events: auto;
     visibility: visible;
@@ -261,231 +282,220 @@
     height: 2rem;
   }
 
-  .nav-open .icon-mobile-nav[name="close-outline"] {
-    display: block;
-    position: relative;
-    z-index: 9999;
+
+  /***************************************/
+  /*  BELOW 700px (Smaller tablets)   */
+  /*************************************/
+
+
+  @media (max-width: 44em) {
+
+
+    .flex-between {
+      gap: 4.8rem;
+    }
+
+    .btn-view a:link,
+    .btn-view a:visited,
+    .viedo-caption a:link,
+    .viedo-caption a:visited,
+    .plan-box a:link,
+    .plan-box a:visited {
+      padding: 1.5rem 2.4rem;
+    }
+
+    .heading-secondary {
+      margin-bottom: 4.8rem;
+    }
+
+    .footer .container {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 5rem;
+      text-align: center;
+    }
+
+    .footer .logo-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .get-in-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-get {
+      justify-content: center;
+    }
+
+    .footer-get span {
+      max-width: 20rem;
+      line-height: 1.2;
+    }
+
+    .testimonial {
+      grid-template-columns: 1fr;
+      padding: 6.4rem 2.4rem;
+    }
+
+    .testimonial-right {
+      max-width: 100%;
+    }
+
+    .testimonial-left {
+      text-align: center;
+    }
+
+    .text-testimonial {
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .testimonial-icons {
+      display: none;
+    }
+
+    .person-jop {
+      text-align: center;
+    }
+
+    .info-next {
+      justify-content: center;
+    }
+
+    .wherever-img-box img {
+      width: 50%;
+    }
   }
 
+  /***************************************/
+  /*  BELOW 560px (Phones tablets)   */
+  /*************************************/
 
-  .nav-open .icon-mobile-nav[name="menu-outline"] {
-    display: none;
+
+  @media (max-width: 35em) {
+
+    .check-text {
+      grid-column: 1/-1;
+      justify-content: flex-start !important;
+    }
+
+    .text-group p {
+      max-width: 100%;
+    }
+
+    .about .text-head h3 {
+      font-size: 3.6rem;
+      padding: 1.2rem 0;
+    }
+
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      gap: 3.6rem;
+    }
+
+
+    .footer .container {
+      grid-template-columns: 1fr;
+    }
+
+    .sponsers-section {
+      padding: 9.6rem 0 9.6rem;
+    }
+
+    .sponsers {
+      gap: 2.4rem;
+      min-width: 40rem;
+      max-width: 45rem;
+    }
+
+    .flex-between {
+      gap: 1.4rem;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 4.6rem;
+    }
+
+    .features {
+      grid-template-columns: 1fr;
+    }
+
+    .features-box {
+      align-items: center;
+      text-align: center;
+      gap: 3.6rem;
+    }
+
+    .wherever-img-box img {
+      width: 70%;
+    }
+
+    .active-content {
+      grid-template-columns: repeat(1, 90%);
+      gap: 3.6rem;
+    }
+
+    .active-col {
+      box-shadow: 0px 1rem 2rem rgb(255 62 101 / 10%);
+    }
+
+    .hero-text-box {
+      padding: 4.6rem;
+    }
+
+    .dwnand {
+      margin-right: 0;
+    }
+
+    .footer-get span {
+      max-width: 100%;
+    }
+
+    .footer .container {
+      row-gap: 4rem;
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+    }
+
+    .dwnand,
+    .dwnos {
+      border-width: 1px;
+    }
+
   }
 
-}
-
-/***************************************/
-/*  BELOW 700px (Smaller tablets)   */
-/*************************************/
+  /***************************************/
+  /*  BELOW 380px (Small Phones)   */
+  /*************************************/
 
 
-@media (max-width: 44em) {
+  @media (max-width: 23.75em) {
+
+    .about .text-head h3 {
+      font-size: 3rem;
+      padding: 1.2rem 0;
+    }
+
+    .about .jolly {
+      font-size: 1.6rem;
+      padding: 0;
+    }
+
+    .dwnos,
+    .dwnand {
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+    }
 
 
-  .flex-between {
-    gap: 4.8rem;
-  }
-
-  .btn-view a:link,
-  .btn-view a:visited,
-  .viedo-caption a:link,
-  .viedo-caption a:visited,
-  .plan-box a:link,
-  .plan-box a:visited {
-    padding: 1.5rem 2.4rem;
-  }
-
-  .heading-secondary {
-    margin-bottom: 4.8rem;
-  }
-
-  .footer .container {
-    grid-template-columns: repeat(2, 1fr);
-    row-gap: 5rem;
-    text-align: center;
-  }
-
-  .footer .logo-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .get-in-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer-get {
-    justify-content: center;
-  }
-
-  .footer-get span {
-    max-width: 20rem;
-    line-height: 1.2;
-  }
-
-  .testimonial {
-    grid-template-columns: 1fr;
-    padding: 6.4rem 2.4rem;
-  }
-
-  .testimonial-right {
-    max-width: 100%;
-  }
-
-  .testimonial-left {
-    text-align: center;
-  }
-
-  .text-testimonial {
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  .testimonial-icons {
-    display: none;
-  }
-
-  .person-jop {
-    text-align: center;
-  }
-
-  .info-next {
-    justify-content: center;
-  }
-
-  .wherever-img-box img {
-    width: 50%;
-  }
-}
-
-/***************************************/
-/*  BELOW 560px (Phones tablets)   */
-/*************************************/
-
-
-@media (max-width: 35em) {
-
-  .check-text {
-    grid-column: 1/-1;
-    justify-content: flex-start !important;
-  }
-
-  .text-group p {
-    max-width: 100%;
-  }
-
-  .about .text-head h3 {
-    font-size: 3.6rem;
-    padding: 1.2rem 0;
-  }
-
-  .pricing-grid {
-    grid-template-columns: 1fr;
-    gap: 3.6rem;
-  }
-
-
-  .footer .container {
-    grid-template-columns: 1fr;
-  }
-
-  .sponsers-section {
-    padding: 9.6rem 0 9.6rem;
-  }
-
-  .sponsers {
-    gap: 2.4rem;
-    min-width: 40rem;
-    max-width: 45rem;
-  }
-
-  .flex-between {
-    gap: 1.4rem;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin-bottom: 4.6rem;
-  }
-
-  .features {
-    grid-template-columns: 1fr;
-  }
-
-  .features-box {
-    align-items: center;
-    text-align: center;
-    gap: 3.6rem;
-  }
-
-  .wherever-img-box img {
-    width: 70%;
-  }
-
-  .active-content {
-    grid-template-columns: repeat(1, 90%);
-    gap: 3.6rem;
-  }
-
-  .active-col {
-    box-shadow: 0px 1rem 2rem rgb(255 62 101 / 10%);
-  }
-
-  .hero-text-box {
-    padding: 4.6rem;
-  }
-
-  .dwnand {
-    margin-right: 0;
-  }
-
-  .footer-get span {
-    max-width: 100%;
-  }
-
-  .footer .container {
-    row-gap: 4rem;
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
-  }
-
-  .dwnand,
-  .dwnos {
-    border-width: 1px;
-  }
-
-}
-
-/***************************************/
-/*  BELOW 380px (Small Phones)   */
-/*************************************/
-
-
-@media (max-width: 23.75em) {
-
-  .about .text-head h3 {
-    font-size: 3rem;
-    padding: 1.2rem 0;
-  }
-
-  .about .jolly {
-    font-size: 1.6rem;
-    padding: 0;
-  }
-
-  .dwnos,
-  .dwnand {
-    margin-right: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-  }
-
-
-  .icon-dwnos,
-  .icon-dwnand {
-    margin-right: 0.5rem;
+    .icon-dwnos,
+    .icon-dwnand {
+      margin-right: 0.5rem;
+    }
   }
 }
