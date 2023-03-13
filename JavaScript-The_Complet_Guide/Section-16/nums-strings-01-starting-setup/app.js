@@ -25,3 +25,5 @@ const prodPrice = 29.99;
 const productOutput = productDescription`This product (${prodName}) is ${prodPrice}.`;
 
 console.log(productOutput);
+
+
