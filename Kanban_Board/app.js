@@ -1,182 +1,87 @@
-class kanbanAPI {
-  static getItems(columnId) {
-    const column = read().find((column) => column.id == columnId);
-    if (!column) {
-      return [];
-    }
+const columns = document.querySelectorAll(".column");
+// const listItems = document.querySelectorAll(".list-items")
+const addItem = document.querySelectorAll(".add-item");
+let drag = null;
+// let mainArray = [];
 
-    return column.items;
-  }
+addItem.forEach((addItem) => {
+  addItem.addEventListener("click", (e) => {
+    let listItems = e.target.parentElement.querySelector(".list-items");
+    let item = document.createElement("div");
+    item.className = "item";
+    item.setAttribute("draggable", true);
+    item.innerHTML = `<div class="item-input" contenteditable > </div>
+            <span class="item-control">
+              <ion-icon name="create-outline"></ion-icon>
+              <ion-icon name="trash-outline"></ion-icon>
+            </span>
+            `;
+    listItems.appendChild(item);
+    let dropZone = document.createElement("div");
+    dropZone.className = "dropzone";
+    listItems.appendChild(dropZone);
 
-  static insertItem(columnId, content) {
-    const data = read();
-    const column = data.find((column) => column.id == columnId);
-    const item = {
-      id: Math.floor(Math.random() * 10000),
-      content,
-    };
-    if (!column) {
-      throw new Error("Column does not exist.");
-    }
+    // focus before add
 
-    column.items.push(item);
-    save(data);
-    return item;
-  }
+    listItems.lastElementChild.previousSibling
+      .querySelector(".item-input")
+      .focus();
 
-  static updateItem(itemId, newProps) {
-    const data = read();
-    const [item, currenColumn] = (() => {
-      for (const column of data) {
-        const item = column.items.find((item) => item.id == itemId);
+    // add attribute before add
 
-        if (item) {
-          return [item, column];
-        }
-      }
-    })();
-    if (!item) {
-      throw new Error("Item not found.");
-    }
+    listItems.lastElementChild.previousSibling
+      .querySelector(".item-input")
+      .addEventListener("blur", (e) => {
+        e.target.removeAttribute("contenteditable");
+      });
 
-    item.content =
-      newProps.content === undefined ? item.content : newProps.content;
+    // edit iteme before add
 
-    // Update column andd position
+    listItems.lastElementChild.previousSibling
+      .querySelector(".item-control :first-child")
+      .addEventListener("click", (e) => {
+        e.target.parentElement.previousElementSibling.setAttribute(
+          "contenteditable",
+          ""
+        );
+        e.target.parentElement.previousElementSibling.focus();
+      });
 
-    if (newProps.columnId !== undefined && newProps.position !== undefined) {
-      const targetColumn = data.find(
-        (column) => column.id === newProps.columnId
-      );
-    }
+    // remove item before add
 
-    if (!targetColumn) {
-      throw new Error("Target colum not found.");
-    }
-    currenColumn.items.splice(currenColumn.items.indexOf(item), 1);
-    targetColumn.items.splice(newProps.position, 0, item);
-    save(data);
-  }
+    listItems.lastElementChild.previousSibling
+      .querySelector(".item-control :last-child")
+      .addEventListener("click", (e) => {
+        e.target.parentElement.parentElement.previousElementSibling.remove();
+        e.target.closest(".item").remove();
+      });
 
-  static deleteItem(itemId) {
-    const data = read();
-    for (const column of data) {
-      const item = column.items.find((item) => item.id == itemId);
-      if (item) {
-        column.items.splice(column.items.indexOf(item), 1);
-      }
-    }
-    save(data);
-  }
-}
+    dragItem();
+  });
+});
 
-function read() {
-  const json = localStorage.getItem("kanban-data");
-
-  if (!json) {
-    return [
-      { id: 1, items: [] },
-      { id: 2, items: [] },
-      { id: 3, items: [] },
-    ];
-  }
-
-  return JSON.parse(json);
-}
-
-function save(data) {
-  localStorage.setItem("kanban-data", JSON.stringify(data));
-}
-
-// console.log(kanbanAPI.getItems(2));
-// console.log(kanbanAPI.insertItem(2, "im new"));
-// kanbanAPI.deleteItem(7322);
-
-/////////////////////////////////////////////////
-
-class Kanban {
-  constructor(root) {
-    this.root = root;
-    Kanban.columns().forEach((column) => {
-      //
-      const columnView = new Column(column.id, column.title);
-      this.root.appendChild(columnView.elements.root);
+function dragItem() {
+  let items = document.querySelectorAll(".item");
+  items.forEach((item) => {
+    item.addEventListener("dragstart", function () {
+      drag = item;
+      // item.style.opacity = "0.5";
     });
-  }
-
-  static columns() {
-    return [
-      { id: 1, title: "Not Started" },
-      { id: 2, title: "In Progress" },
-      { id: 3, title: "Completed" },
-    ];
-  }
-}
-////////////////////////////////////
-class Column {
-  constructor(id, title) {
-    this.elements = {};
-    this.elements.root = Column.createRoot();
-    this.elements.title = this.elements.root.querySelector(
-      ".kanban__column-title"
-    );
-    this.elements.items = this.elements.root.querySelector(
-      ".kanban__column-items"
-    );
-    this.elements.addItem =
-      this.elements.root.querySelector(".kanban__add-item");
-
-    this.elements.root.dataset.id = id;
-    this.elements.title.textContent = title;
-
-    // this.elements.addItem.addEventListener("click", () => {});
-    kanbanAPI.getItems(id).forEach((item) => {
-      console.log(item);
+    item.addEventListener("dragend", function () {
+      drag = null;
+      // item.style.opacity = "1";
     });
-  }
-  static createRoot() {
-    const range = document.createRange();
-    range.selectNode(document.body);
-    return range.createContextualFragment(`
-    <div class="kanban--column">
-      <div class="kanban__column-title"></div>
-      <div class="kanban__column-items"></div>
-      <button class="kanban--add-item">+ Add</button>
-    </div>
-    `).children[0];
-  }
-  renderItem(data) {
-    const item = new Item(data.id, data.content);
-    this.elements.items.appendChild(item.elements.root);
-  }
-}
 
-///
-new Kanban(document.querySelector(".kanban"));
+    columns.forEach((column) => {
+      column.addEventListener("dragover", function (e) {
+        e.preventDefault();
+      });
 
-/////////////////////////////////////
+      column.addEventListener("dragleave", function () {});
 
-class Item {
-  constructor(id, content) {
-    this.elements = {};
-    this.elements.root = Item.createRoot();
-    this.elements.input = this.elements.root.querySelector(
-      ".kanban__item-input"
-    );
-    this.elements.root.dataset.id = id;
-    this.elements.input.textContent = content;
-    this.content = content;
-  }
-
-  static createRoot() {
-    const range = document.createRange();
-
-    range.selectNode(document.body);
-
-    return range.createContextualFragment(`
-    <div class="kanban__item draggable="true">
-    <div class= "kanban__item-input" contenteditable></div>
-    </div>
-    `).children[0];
-  }
+      column.addEventListener("drop", function () {
+        this.querySelector(".list-items").appendChild(drag);
+      });
+    });
+  });
 }
