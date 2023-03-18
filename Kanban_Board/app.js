@@ -4,72 +4,92 @@ const addItem = document.querySelectorAll(".add-item");
 let drag = null;
 // let mainArray = [];
 
+// columns.forEach((column) => {
+//   let addBtn = column.querySelector(".add-item");
+//   addBtn.addEventListener("click", (e) => {
+//     let input = e.target.parentElement.querySelector(".item-input");
+//     console.log(input);
+//     let listItems = e.target.parentElement.querySelector(".list-items");
+//     let item = document.createElement("div");
+//     item.className = "item";
+//     item.setAttribute("draggable", true);
+//     item.innerHTML = `<input class="item-input" />
+//       <span class="item-control">
+//       <ion-icon name="create-outline"></ion-icon>
+//       <ion-icon name="trash-outline"></ion-icon>
+//       </span>
+//       `;
+//     listItems.prepend(item);
+//   });
+//   dragItem();
+// });
+
 addItem.forEach((addItem) => {
   addItem.addEventListener("click", (e) => {
     let listItems = e.target.parentElement.querySelector(".list-items");
-    let item = document.createElement("div");
-    item.className = "item";
-    item.setAttribute("draggable", true);
-    item.innerHTML = `<div class="item-input" contenteditable > </div>
-            <span class="item-control">
-              <ion-icon name="create-outline"></ion-icon>
-              <ion-icon name="trash-outline"></ion-icon>
-            </span>
-            `;
-    listItems.appendChild(item);
-    let dropZone = document.createElement("div");
-    dropZone.className = "dropzone";
-    listItems.appendChild(dropZone);
+    let inputItem = e.target.parentElement.querySelectorAll(".item-input");
+    let lastinputItem = inputItem[inputItem.length - 1];
+    console.log(lastinputItem);
+    if (!lastinputItem || lastinputItem.innerHTML != "") {
+      let item = document.createElement("div");
+      item.className = "item";
+      item.setAttribute("draggable", true);
+      item.innerHTML = `<div class="item-input" contenteditable ></div>
+    <span class="item-control">
+    <ion-icon name="create-outline"></ion-icon>
+    <ion-icon name="trash-outline"></ion-icon>
+    </span>
+    `;
+      listItems.appendChild(item);
 
-    // focus before add
+      // focus before add
 
-    listItems.lastElementChild.previousSibling
-      .querySelector(".item-input")
-      .focus();
+      listItems.lastElementChild.querySelector(".item-input").focus();
 
-    // add attribute before add
+      // add attribute before add
 
-    listItems.lastElementChild.previousSibling
-      .querySelector(".item-input")
-      .addEventListener("blur", (e) => {
-        e.target.removeAttribute("contenteditable");
-      });
+      listItems.lastElementChild
+        .querySelector(".item-input")
+        .addEventListener("blur", (e) => {
+          e.target.removeAttribute("contenteditable");
+        });
 
-    // edit iteme before add
+      // edit iteme before add
 
-    listItems.lastElementChild.previousSibling
-      .querySelector(".item-control :first-child")
-      .addEventListener("click", (e) => {
-        e.target.parentElement.previousElementSibling.setAttribute(
-          "contenteditable",
-          ""
-        );
-        e.target.parentElement.previousElementSibling.focus();
-      });
+      listItems.lastElementChild
+        .querySelector(".item-control :first-child")
+        .addEventListener("click", (e) => {
+          e.target.parentElement.previousElementSibling.setAttribute(
+            "contenteditable",
+            ""
+          );
+          e.target.parentElement.previousElementSibling.focus();
+        });
 
-    // remove item before add
+      // remove item before add
 
-    listItems.lastElementChild.previousSibling
-      .querySelector(".item-control :last-child")
-      .addEventListener("click", (e) => {
-        e.target.parentElement.parentElement.previousElementSibling.remove();
-        e.target.closest(".item").remove();
-      });
-
+      listItems.lastElementChild
+        .querySelector(".item-control :last-child")
+        .addEventListener("click", (e) => {
+          e.target.parentElement.parentElement.remove();
+          e.target.closest(".item").remove();
+        });
+    } else {
+      alert("add item");
+    }
     dragItem();
   });
 });
 
+/// DragItems //////////////////////////////////////////
 function dragItem() {
   let items = document.querySelectorAll(".item");
   items.forEach((item) => {
     item.addEventListener("dragstart", function () {
       drag = item;
-      // item.style.opacity = "0.5";
     });
     item.addEventListener("dragend", function () {
       drag = null;
-      // item.style.opacity = "1";
     });
 
     columns.forEach((column) => {

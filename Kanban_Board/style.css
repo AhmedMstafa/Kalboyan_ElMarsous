@@ -45,6 +45,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
 
 .item-input {
@@ -52,6 +53,8 @@
   outline: none;
   overflow: hidden;
   text-align: left;
+  border: none;
+  font-size: 20px;
 }
 
 .item-control :first-child,
@@ -91,11 +94,6 @@
   -o-transition: background 0.15s, heigth 0.15s;
 }
 
-.dropzone--active {
-  height: 20px;
-  background-color: rgba(0, 0, 0, 0.25);
-}
-
 .add-item {
   width: 100%;
   padding: 10px 0;
@@ -109,6 +107,7 @@
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 @media (max-width: 900px) {
