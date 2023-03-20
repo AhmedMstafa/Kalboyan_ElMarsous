@@ -133,10 +133,11 @@ addBtns.forEach((addBtn) => {
   });
 });
 
-function addItem(e, column, itemInput) {
+function addItem(e, column) {
   const listItems = column.querySelector(".list-items");
   let item = document.createElement("div");
   item.className = "item";
+  item.setAttribute("input", "");
   item.setAttribute("draggable", true);
   item.innerHTML = `<div class="item-input" contenteditable ></div>
   <span class="item-control">
@@ -160,6 +161,9 @@ function save(item, listItems) {
       e.target.removeAttribute("contenteditable");
       if (item.textContent.trim() != "") {
         addTaskToArray(listItems.parentElement, item.textContent.trim());
+        if (item.hasAttribute("input")) {
+          item.remove();
+        }
       }
     });
   listItems.lastElementChild
@@ -169,6 +173,9 @@ function save(item, listItems) {
         e.target.removeAttribute("contenteditable");
         if (item.textContent.trim() != "") {
           addTaskToArray(listItems.parentElement, item.textContent.trim());
+          if (item.hasAttribute("input")) {
+            item.remove();
+          }
         }
       }
     });
