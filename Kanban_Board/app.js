@@ -117,78 +117,215 @@
 // }
 // console.log(arrayOfTasks);
 
-let arryOfTasks = [];
+// let columns = document.querySelectorAll(".column");
 
+// let arryOfTasks = [];
+
+// const addBtns = document.querySelectorAll(".add-item");
+
+// addBtns.forEach((addBtn) => {
+//   addBtn.addEventListener("click", (e) => {
+//     const column = e.target.parentElement;
+//     const itemInput = column.querySelectorAll(".item-input");
+//     const lastItemInput = itemInput[itemInput.length - 1];
+//     if (!lastItemInput || lastItemInput.textContent.trim() != "") {
+//       addItem(column.id);
+//     } else {
+//     }
+//   });
+// });
+
+// function addItem(columnId) {
+//   let column = document.getElementById(columnId);
+//   const listItems = column.querySelector(".list-items");
+//   let item = document.createElement("div");
+//   item.className = "item";
+//   item.setAttribute("draggable", true);
+//   item.innerHTML = `<div class="item-input" contenteditable ></div>
+//   <span class="item-control">
+//   <ion-icon name="create-outline"></ion-icon>
+//   <ion-icon name="trash-outline"></ion-icon>
+//   </span>
+//   `;
+//   listItems.appendChild(item);
+
+//   const lastItemInList =
+//     listItems.lastElementChild.querySelector(".item-input");
+//   // focus
+//   lastItemInList.focus();
+//   save(item, listItems);
+// }
+
+// function save(item, listItems) {
+//   listItems.lastElementChild
+//     .querySelector(".item-input")
+//     .addEventListener("keypress", (e) => {
+//       if (e.key === "Enter") {
+//         e.target.removeAttribute("contenteditable");
+//         if (item.textContent.trim() != "") {
+//           addTaskToArray(listItems, item.textContent.trim());
+//           listItems.nextElementSibling.click();
+//         } else {
+//           item.remove();
+//         }
+//       }
+//     });
+//   // listItems.lastElementChild
+//   //   .querySelector(".item-input")
+//   //   .addEventListener("blur", (e) => {
+//   //     e.target.removeAttribute("contenteditable");
+//   //     if (item.textContent.trim() != "") {
+//   //       addTaskToArray(listItems, item.textContent.trim());
+//   //     }
+//   //   });
+// }
+
+// function addTaskToArray(listItems, itemInput) {
+//   const task = {
+//     columnId: listItems.parentElement.id,
+//     content: {
+//       id: Date.now(),
+//       title: itemInput,
+//     },
+//   };
+//   arryOfTasks.push(task);
+//   addElementsToPageFrom(listItems, arryOfTasks);
+// }
+
+// function addElementsToPageFrom(listItems, arrayOfTasks) {
+//   listItems.innerHTML = "";
+
+//   arrayOfTasks.forEach((task) => {
+//     let item = document.createElement("div");
+//     item.className = "item";
+//     item.setAttribute("id", task.content.id);
+//     item.setAttribute("draggable", true);
+//     item.innerHTML = `<div class="item-input" contenteditable >${task.content.title}</div>
+//     <span class="item-control">
+//     <ion-icon name="create-outline"></ion-icon>
+//     <ion-icon name="trash-outline"></ion-icon>
+//     </span>
+//     `;
+//     listItems.appendChild(item);
+//   });
+// }
+
+const columns = document.querySelectorAll(".column");
 const addBtns = document.querySelectorAll(".add-item");
 
-addBtns.forEach((addBtn) => {
-  addBtn.addEventListener("click", (e) => {
-    const column = e.target.parentElement;
-    const itemInput = column.querySelectorAll(".item-input");
+let arrayOne = [];
+let arrayTwo = [];
+let arrayThree = [];
+
+addBtns[0].addEventListener("click", addItem.bind(null, columns[0], arrayTwo));
+addBtns[1].addEventListener("click", addItem.bind(null, columns[1], arrayTwo));
+addBtns[2].addEventListener(
+  "click",
+  addItem.bind(null, columns[2], arrayThree)
+);
+
+class Task {
+  constructor(column, array) {
+    (this.array = array), (this.column = column);
+  }
+
+  clickHand() {
+    const itemInput = this.column.querySelectorAll(".item-input");
     const lastItemInput = itemInput[itemInput.length - 1];
     if (!lastItemInput || lastItemInput.textContent.trim() != "") {
-      addItem(e, column, lastItemInput);
+      this.addItem();
     } else {
     }
-  });
-});
+  }
 
-function addItem(e, column) {
-  const listItems = column.querySelector(".list-items");
-  let item = document.createElement("div");
-  item.className = "item";
-  item.setAttribute("input", "");
-  item.setAttribute("draggable", true);
-  item.innerHTML = `<div class="item-input" contenteditable ></div>
+  addItem() {
+    const listItems = this.column.querySelector(".list-items");
+    let item = document.createElement("div");
+    item.className = "item";
+    item.setAttribute("draggable", true);
+    item.innerHTML = `<div class="item-input" contenteditable ></div>
   <span class="item-control">
   <ion-icon name="create-outline"></ion-icon>
   <ion-icon name="trash-outline"></ion-icon>
   </span>
   `;
-  listItems.appendChild(item);
+    listItems.appendChild(item);
 
-  const lastItemInList =
-    listItems.lastElementChild.querySelector(".item-input");
-  // focus
-  lastItemInList.focus();
-  save(item, listItems);
-}
-
-function save(item, listItems) {
-  listItems.lastElementChild
-    .querySelector(".item-input")
-    .addEventListener("blur", (e) => {
-      e.target.removeAttribute("contenteditable");
-      if (item.textContent.trim() != "") {
-        addTaskToArray(listItems.parentElement, item.textContent.trim());
-        if (item.hasAttribute("input")) {
-          item.remove();
-        }
-      }
-    });
-  listItems.lastElementChild
-    .querySelector(".item-input")
-    .addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
+    const lastItemInList =
+      listItems.lastElementChild.querySelector(".item-input");
+    // focus
+    lastItemInList.focus();
+    this.save(item, listItems);
+  }
+  save(item, listItems) {
+    listItems.lastElementChild
+      .querySelector(".item-input")
+      .addEventListener("blur", (e) => {
         e.target.removeAttribute("contenteditable");
         if (item.textContent.trim() != "") {
-          addTaskToArray(listItems.parentElement, item.textContent.trim());
-          if (item.hasAttribute("input")) {
+          this.addTaskToArray(listItems, item.textContent.trim());
+          item.remove();
+
+          // listItems.nextElementSibling.click();
+          return;
+        } else {
+          item.remove();
+          return;
+        }
+      });
+    listItems.lastElementChild
+      .querySelector(".item-input")
+      .addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          e.target.removeAttribute("contenteditable");
+          if (item.textContent.trim() != "") {
+            this.addTaskToArray(listItems, item.textContent.trim());
             item.remove();
+            listItems.nextElementSibling.click();
+            return;
+          } else {
+            item.remove();
+            return;
           }
         }
-      }
+      });
+  }
+
+  addTaskToArray(listItems, itemInput) {
+    const task = {
+      columnId: listItems.parentElement.id,
+      content: {
+        id: Date.now(),
+        title: itemInput,
+      },
+    };
+    this.array.push(task);
+    console.log(this.array);
+    // this.addElementsToPageFrom(listItems);
+    // console.log(array);
+  }
+
+  addElementsToPageFrom(listItems) {
+    listItems.innerHTML = "";
+
+    this.array.forEach((task) => {
+      let item = document.createElement("div");
+      item.className = "item";
+      item.setAttribute("id", task.content.id);
+      item.setAttribute("draggable", true);
+      item.innerHTML = `<div class="item-input" contenteditable >${task.content.title}</div>
+    <span class="item-control">
+    <ion-icon name="create-outline"></ion-icon>
+    <ion-icon name="trash-outline"></ion-icon>
+    </span>
+    `;
+      // console.log(this.array, this.column);
+      listItems.appendChild(item);
     });
+  }
 }
 
-function addTaskToArray(column, itemInput) {
-  const task = {
-    columnId: column.id,
-    contet: {
-      id: Date.now(),
-      tilte: itemInput,
-    },
-  };
-  arryOfTasks.push(task);
-  console.log(arryOfTasks);
+function addItem(column, array) {
+  const columnOne = new Task(column, array);
+  columnOne.clickHand();
 }
