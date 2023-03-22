@@ -173,7 +173,7 @@ function dragItem() {
       column.addEventListener("dragleave", (_) => {
         column.removeAttribute("style");
       });
-      column.addEventListener("drop", (e) => {
+      column.addEventListener("drop", (_) => {
         if (drag) {
           column.firstElementChild.nextElementSibling.appendChild(drag);
           dragItemWith(drag.getAttribute("data-id"), column.id);
@@ -191,6 +191,5 @@ function dragItemWith(dragId, columnId) {
     }
     return task;
   });
-
   addDataToLocalStorgeFrom(mainArray);
 }
