@@ -5,6 +5,8 @@ addBtn[0].addEventListener("click", addItems);
 addBtn[1].addEventListener("click", addItems);
 addBtn[2].addEventListener("click", addItems);
 
+let drag = null;
+
 mainArray = [];
 
 if (localStorage.getItem("tasks")) {
@@ -21,7 +23,6 @@ function addItems(e) {
   if (!lastinputItem || lastinputItem.textContent.trim() != "") {
     let item = document.createElement("div");
     item.className = "item";
-    item.setAttribute("draggable", true);
     item.innerHTML = `<div class="item-input" contenteditable ></div>
     <span class="item-control">
     </span>
@@ -54,11 +55,11 @@ function save(item) {
   });
 }
 
-function addTaskToArray(item) {
+function addTaskToArray(item, update) {
   let text = item.textContent.trim();
   let columnId = item.parentElement.parentElement.id;
   let task = {
-    id: columnId,
+    id: update || columnId,
     content: {
       id: Date.now(),
       title: text,
@@ -84,8 +85,10 @@ function addTasksToPageFrom(mainArray) {
     <ion-icon name="trash-outline"></ion-icon>
     </span>
     `;
+
     delet(item);
     edit(item);
+
     if (task.id == 0) {
       columns[0].querySelector(".list-items").appendChild(item);
     } else if (task.id == 1) {
@@ -93,6 +96,7 @@ function addTasksToPageFrom(mainArray) {
     } else if (task.id == 2) {
       columns[2].querySelector(".list-items").appendChild(item);
     }
+    dragItem();
   });
 }
 
@@ -112,8 +116,13 @@ function edit(item) {
     itemInput.focus();
   });
   itemInput.addEventListener("blur", () => {
-    editTaskWith(item.getAttribute("data-id"), itemInput.innerHTML);
-    itemInput.removeAttribute("contenteditable");
+    if (itemInput.textContent == "") {
+      item.remove();
+      deleteTaskWith(item.getAttribute("data-id"));
+    } else {
+      editTaskWith(item.getAttribute("data-id"), itemInput.innerHTML);
+      itemInput.removeAttribute("contenteditable");
+    }
   });
 }
 
@@ -138,6 +147,50 @@ function editTaskWith(taskId, input) {
   mainArray = mainArray.map((task) => {
     if (task.content.id == taskId) {
       task.content.title = input;
+    }
+    return task;
+  });
+
+  addDataToLocalStorgeFrom(mainArray);
+}
+
+function dragItem() {
+  let items = document.querySelectorAll(".item");
+  items.forEach((item) => {
+    item.addEventListener("dragstart", (_) => {
+      drag = item;
+      item.style.opacity = "0.5";
+      item.lastElementChild.style.display = "none ";
+    });
+    item.addEventListener("dragend", (_) => {
+      drag = null;
+      item.style.opacity = "1";
+      item.lastElementChild.style.display = "block";
+    });
+
+    columns.forEach((column) => {
+      column.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        column.style.boxShadow = " 0px 0px 15px #8BF5FA";
+      });
+      column.addEventListener("dragleave", (_) => {
+        column.removeAttribute("style");
+      });
+      column.addEventListener("drop", (e) => {
+        if (drag) {
+          column.firstElementChild.nextElementSibling.appendChild(drag);
+          dragItemWith(drag.getAttribute("data-id"), column.id);
+        }
+        column.removeAttribute("style");
+      });
+    });
+  });
+}
+
+function dragItemWith(dragId, columnId) {
+  mainArray = mainArray.map((task) => {
+    if (task.content.id == dragId) {
+      task.id = columnId;
     }
     return task;
   });

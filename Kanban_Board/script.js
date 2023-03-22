@@ -1,132 +1,132 @@
-const addBtn = document.querySelectorAll(".add-item");
-const columns = document.querySelectorAll(".column");
+// const addBtn = document.querySelectorAll(".add-item");
+// const columns = document.querySelectorAll(".column");
 
-arrayOne = [];
-arrayTow = [];
-arrayThree = [];
+// arrayOne = [];
+// arrayTow = [];
+// arrayThree = [];
 
-if (localStorage.getItem("tasksOne")) {
-  arrayOne = JSON.parse(localStorage.getItem("tasksOne"));
-}
-if (localStorage.getItem("tasksTwo")) {
-  arrayTow = JSON.parse(localStorage.getItem("tasksTwo"));
-}
-if (localStorage.getItem("tasksThree")) {
-  arrayThree = JSON.parse(localStorage.getItem("tasksThree"));
-}
+// if (localStorage.getItem("tasksOne")) {
+//   arrayOne = JSON.parse(localStorage.getItem("tasksOne"));
+// }
+// if (localStorage.getItem("tasksTwo")) {
+//   arrayTow = JSON.parse(localStorage.getItem("tasksTwo"));
+// }
+// if (localStorage.getItem("tasksThree")) {
+//   arrayThree = JSON.parse(localStorage.getItem("tasksThree"));
+// }
 
-addBtn[0].addEventListener("click", addItems.bind(null, columns[0], arrayOne));
-addBtn[1].addEventListener("click", addItems.bind(null, columns[1], arrayTow));
-addBtn[2].addEventListener(
-  "click",
-  addItems.bind(null, columns[2], arrayThree)
-);
+// addBtn[0].addEventListener("click", addItems.bind(null, columns[0], arrayOne));
+// addBtn[1].addEventListener("click", addItems.bind(null, columns[1], arrayTow));
+// addBtn[2].addEventListener(
+//   "click",
+//   addItems.bind(null, columns[2], arrayThree)
+// );
 
-function addItems(column, array) {
-  let listItems = column.querySelector(".list-items");
-  let inputItem = column.querySelectorAll(".item-input");
-  let lastinputItem = inputItem[inputItem.length - 1];
-  if (!lastinputItem || lastinputItem.textContent.trim() != "") {
-    addItems();
-  }
-  function addItems() {
-    let item = document.createElement("div");
-    item.className = "item";
-    item.setAttribute("draggable", true);
-    item.innerHTML = `<div class="item-input" contenteditable ></div>
-    <span class="item-control">
-    <ion-icon name="create-outline"></ion-icon>
-    <ion-icon name="trash-outline"></ion-icon>
-    </span>
-    `;
-    listItems.appendChild(item);
+// function addItems(column, array) {
+//   let listItems = column.querySelector(".list-items");
+//   let inputItem = column.querySelectorAll(".item-input");
+//   let lastinputItem = inputItem[inputItem.length - 1];
+//   if (!lastinputItem || lastinputItem.textContent.trim() != "") {
+//     addItems();
+//   }
+//   function addItems() {
+//     let item = document.createElement("div");
+//     item.className = "item";
+//     item.setAttribute("draggable", true);
+//     item.innerHTML = `<div class="item-input" contenteditable ></div>
+//     <span class="item-control">
+//     <ion-icon name="create-outline"></ion-icon>
+//     <ion-icon name="trash-outline"></ion-icon>
+//     </span>
+//     `;
+//     listItems.appendChild(item);
 
-    save(item);
-  }
-  function save(item) {
-    listItems.lastElementChild
-      .querySelector(".item-input")
-      .addEventListener("blur", (e) => {
-        if (item.textContent.trim() != "") {
-          addTaskToArray(item.textContent.trim());
-          item.remove();
-          return;
-        }
-      });
-    listItems.lastElementChild
-      .querySelector(".item-input")
-      .addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          if (item.textContent.trim() != "") {
-            addTaskToArray(item.textContent.trim());
-            item.remove();
-            return;
-          }
-        }
-      });
-  }
-  function addTaskToArray(text) {
-    let task = {
-      id: column.id,
-      content: {
-        id: Date.now(),
-        title: text,
-      },
-    };
-    array.push(task);
-    // console.log(array);
-    addTasksToPageFrom(array);
-    addDataToLocalStorgeFrom(array);
-  }
+//     save(item);
+//   }
+//   function save(item) {
+//     listItems.lastElementChild
+//       .querySelector(".item-input")
+//       .addEventListener("blur", (e) => {
+//         if (item.textContent.trim() != "") {
+//           addTaskToArray(item.textContent.trim());
+//           item.remove();
+//           return;
+//         }
+//       });
+//     listItems.lastElementChild
+//       .querySelector(".item-input")
+//       .addEventListener("keypress", (e) => {
+//         if (e.key === "Enter") {
+//           if (item.textContent.trim() != "") {
+//             addTaskToArray(item.textContent.trim());
+//             item.remove();
+//             return;
+//           }
+//         }
+//       });
+//   }
+//   function addTaskToArray(text) {
+//     let task = {
+//       id: column.id,
+//       content: {
+//         id: Date.now(),
+//         title: text,
+//       },
+//     };
+//     array.push(task);
+//     // console.log(array);
+//     addTasksToPageFrom(array);
+//     addDataToLocalStorgeFrom(array);
+//   }
 
-  function addTasksToPageFrom(array) {
-    listItems.innerHTML = "";
-    array.forEach((task) => {
-      let item = document.createElement("div");
-      item.className = "item";
-      item.setAttribute("data-id", task.content.id);
-      item.setAttribute("draggable", true);
-      item.innerHTML = `<div class="item-input" >${task.content.title}</div>
-      <span class="item-control">
-      <ion-icon name="create-outline"></ion-icon>
-      <ion-icon name="trash-outline"></ion-icon>
-      </span>
-      `;
-      // deleteListener();
-      // editeListener();
-      listItems.appendChild(item);
-    });
-  }
-  function addDataToLocalStorgeFrom(array) {
-    if (array === arrayOne) {
-      console.log(array);
-      localStorage.setItem("tasksOne", JSON.stringify(array));
-    } else if (array === arrayTow) {
-      localStorage.setItem("tasksTwo", JSON.stringify(array));
-    } else if (array === arrayThree) {
-      localStorage.setItem("tasksThree", JSON.stringify(array));
-    }
-  }
-  function getDataFromLoacalStorge() {
-    let dataOne = localStorage.getItem("tasksOne");
-    let dataTwo = localStorage.getItem("tasksTwo");
-    let dataThree = localStorage.getItem("tasksThree");
-    if (dataOne) {
-      let tasksOne = JSON.parse(dataOne);
-      addTasksToPageFrom(tasksOne);
-    }
+//   function addTasksToPageFrom(array) {
+//     listItems.innerHTML = "";
+//     array.forEach((task) => {
+//       let item = document.createElement("div");
+//       item.className = "item";
+//       item.setAttribute("data-id", task.content.id);
+//       item.setAttribute("draggable", true);
+//       item.innerHTML = `<div class="item-input" >${task.content.title}</div>
+//       <span class="item-control">
+//       <ion-icon name="create-outline"></ion-icon>
+//       <ion-icon name="trash-outline"></ion-icon>
+//       </span>
+//       `;
+//       // deleteListener();
+//       // editeListener();
+//       listItems.appendChild(item);
+//     });
+//   }
+//   function addDataToLocalStorgeFrom(array) {
+//     if (array === arrayOne) {
+//       console.log(array);
+//       localStorage.setItem("tasksOne", JSON.stringify(array));
+//     } else if (array === arrayTow) {
+//       localStorage.setItem("tasksTwo", JSON.stringify(array));
+//     } else if (array === arrayThree) {
+//       localStorage.setItem("tasksThree", JSON.stringify(array));
+//     }
+//   }
+//   function getDataFromLoacalStorge() {
+//     let dataOne = localStorage.getItem("tasksOne");
+//     let dataTwo = localStorage.getItem("tasksTwo");
+//     let dataThree = localStorage.getItem("tasksThree");
+//     if (dataOne) {
+//       let tasksOne = JSON.parse(dataOne);
+//       addTasksToPageFrom(tasksOne);
+//     }
 
-    if (dataTwo) {
-      let tasksTwo = JSON.parse(dataTwo);
-      addTasksToPageFrom(tasksTwo);
-    }
+//     if (dataTwo) {
+//       let tasksTwo = JSON.parse(dataTwo);
+//       addTasksToPageFrom(tasksTwo);
+//     }
 
-    if (dataThree) {
-      let tasksThree = JSON.parse(dataThree);
-      addDataToLocalStorgeFrom(tasksThree);
-    }
-  }
-}
+//     if (dataThree) {
+//       let tasksThree = JSON.parse(dataThree);
+//       addDataToLocalStorgeFrom(tasksThree);
+//     }
+//   }
+// }
 
 // const columns = document.querySelectorAll(".column");
 // const addItem = document.querySelectorAll(".add-item");
