@@ -38,7 +38,7 @@
 }
 
 .item {
-  padding: 10px 15px;
+  padding: 10px 5px 10px 10px;
   box-sizing: border-box;
   background-color: white;
   border-radius: 5px;
@@ -61,13 +61,13 @@
   text-align: left;
   border: none;
   font-size: 20px;
-  max-width: 150px;
+  max-width: 160px;
 }
 
 .item-control :first-child,
 .item-control :last-child {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
   cursor: pointer;
   transition: 0.3s;
   -webkit-transition: 0.3s;
@@ -85,11 +85,11 @@
 
 .item-control :first-child:hover,
 .item-control :last-child:hover {
-  transform: scale(1.2);
-  -webkit-transform: scale(1.2);
-  -moz-transform: scale(1.2);
-  -ms-transform: scale(1.2);
-  -o-transform: scale(1.2);
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  -o-transform: scale(1.1);
 }
 
 .dropzone {
@@ -117,6 +117,10 @@
   margin-top: 10px;
 }
 
+.item.input .item-input {
+  max-width: 210px;
+}
+
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
@@ -124,5 +128,13 @@
   }
   .column:not(:last-child) {
     margin-right: 0px;
+  }
+  .item-input {
+    max-width: fit-content;
+    margin-right: 10px;
+  }
+  .item.input .item-input {
+    max-width: fit-content;
+    padding: 5px;
   }
 }

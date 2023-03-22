@@ -16,26 +16,23 @@ if (localStorage.getItem("tasks")) {
 getDataFromLoacalStorge();
 
 function addItems(e) {
-  let column = e.target.parentElement;
   let listItems = e.target.previousElementSibling;
   let itemInput = listItems.querySelectorAll(".item-input");
   let lastinputItem = itemInput[itemInput.length - 1];
   if (!lastinputItem || lastinputItem.textContent.trim() != "") {
     let item = document.createElement("div");
-    item.className = "item";
+    item.className = "item input";
     item.innerHTML = `<div class="item-input" contenteditable ></div>
-    <span class="item-control">
-    </span>
     `;
     listItems.appendChild(item);
     save(item);
   } else {
-    // Add Commnt to user
+    // Add Message to user
   }
 }
 
 function save(item) {
-  let input = item.querySelector(".item-input");
+  let input = item.firstElementChild;
   let btn = item.parentElement.nextElementSibling;
   input.focus();
   input.addEventListener("keypress", (e) => {
@@ -43,7 +40,7 @@ function save(item) {
       e.target.blur();
     }
   });
-  input.addEventListener("blur", () => {
+  input.addEventListener("blur", (_) => {
     if (item.textContent.trim() != "") {
       addTaskToArray(item);
       item.remove();
@@ -72,7 +69,7 @@ function addTaskToArray(item, update) {
 
 function addTasksToPageFrom(mainArray) {
   columns.forEach((column) => {
-    column.querySelector(".list-items").innerHTML = "";
+    column.firstElementChild.nextElementSibling.innerHTML = "";
   });
   mainArray.forEach((task) => {
     let item = document.createElement("div");
@@ -90,32 +87,32 @@ function addTasksToPageFrom(mainArray) {
     edit(item);
 
     if (task.id == 0) {
-      columns[0].querySelector(".list-items").appendChild(item);
+      columns[0].firstElementChild.nextElementSibling.appendChild(item);
     } else if (task.id == 1) {
-      columns[1].querySelector(".list-items").appendChild(item);
+      columns[1].firstElementChild.nextElementSibling.appendChild(item);
     } else if (task.id == 2) {
-      columns[2].querySelector(".list-items").appendChild(item);
+      columns[2].firstElementChild.nextElementSibling.appendChild(item);
     }
     dragItem();
   });
 }
 
 function delet(item) {
-  let delet = item.querySelector(".item-control :last-child");
-  delet.addEventListener("click", () => {
+  let delet = item.lastElementChild.lastElementChild;
+  delet.addEventListener("click", (_) => {
     item.remove();
     deleteTaskWith(item.getAttribute("data-id"));
   });
 }
 
 function edit(item) {
-  let edit = item.querySelector(".item-control :first-child");
-  let itemInput = item.querySelector(".item-input");
-  edit.addEventListener("click", () => {
+  let edit = item.lastElementChild.firstElementChild;
+  let itemInput = item.firstElementChild;
+  edit.addEventListener("click", (_) => {
     itemInput.setAttribute("contenteditable", "");
     itemInput.focus();
   });
-  itemInput.addEventListener("blur", () => {
+  itemInput.addEventListener("blur", (_) => {
     if (itemInput.textContent == "") {
       item.remove();
       deleteTaskWith(item.getAttribute("data-id"));
