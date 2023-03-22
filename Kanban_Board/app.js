@@ -55,12 +55,13 @@ function save(item) {
 function addTaskToArray(item, update) {
   let text = item.textContent.trim();
   let columnId = item.parentElement.parentElement.id;
-  let date = new Date(Date.now());
-  let time = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+  let time = `${new Date(Date.now()).getDate()}-${
+    new Date(Date.now()).getMonth() + 1
+  }-${new Date(Date.now()).getFullYear()}`;
   let task = {
     id: update || columnId,
     content: {
-      id: Date.parse(date),
+      id: Date.now(),
       title: text,
       time,
     },
