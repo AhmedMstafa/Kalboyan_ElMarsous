@@ -55,13 +55,17 @@ function save(item) {
 function addTaskToArray(item, update) {
   let text = item.textContent.trim();
   let columnId = item.parentElement.parentElement.id;
+  let date = new Date(Date.now());
+  let time = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
   let task = {
     id: update || columnId,
     content: {
-      id: Date.now(),
+      id: Date.parse(date),
       title: text,
+      time,
     },
   };
+  console.log(task);
   mainArray.push(task);
   addTasksToPageFrom(mainArray);
   addDataToLocalStorgeFrom(mainArray);
@@ -74,6 +78,7 @@ function addTasksToPageFrom(mainArray) {
   mainArray.forEach((task) => {
     let item = document.createElement("div");
     item.className = "item";
+    item.setAttribute("data-time", task.content.time);
     item.setAttribute("data-id", task.content.id);
     item.setAttribute("draggable", true);
     item.innerHTML = `<div class="item-input" >${task.content.title}</div>
