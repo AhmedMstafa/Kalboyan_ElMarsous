@@ -55,6 +55,9 @@
   text-align: left;
   border: none;
   font-size: 20px;
+  max-width: 150px;
+  /* white-space: nowrap; */
+  /* background-color: red; */
 }
 
 .item-control :first-child,
