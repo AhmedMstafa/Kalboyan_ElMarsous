@@ -66,7 +66,6 @@ function addTaskToArray(item, update) {
       time,
     },
   };
-  console.log(task);
   mainArray.push(task);
   addTasksToPageFrom(mainArray);
   addDataToLocalStorgeFrom(mainArray);
@@ -162,6 +161,7 @@ function dragItem() {
   items.forEach((item) => {
     item.addEventListener("dragstart", (_) => {
       drag = item;
+
       item.style.opacity = "0.5";
       item.lastElementChild.style.display = "none ";
     });
