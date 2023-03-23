@@ -44,10 +44,15 @@ function save(item) {
     if (item.textContent.trim() != "") {
       addTaskToArray(item);
       item.remove();
-      btn.click();
+      // btn.click();
       return;
     } else {
       item.remove();
+      // item.firstElementChild.innerHTML =
+      //   "<small class='message'>Empty task</small>";
+      // setTimeout(() => {
+      //   item.remove();
+      // }, 400);
     }
   });
 }
