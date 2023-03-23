@@ -60,15 +60,11 @@ function save(item) {
 function addTaskToArray(item, update) {
   let text = item.textContent.trim();
   let columnId = item.parentElement.parentElement.id;
-  let time = `${new Date(Date.now()).getDate()}-${
-    new Date(Date.now()).getMonth() + 1
-  }-${new Date(Date.now()).getFullYear()}`;
   let task = {
     id: update || columnId,
     content: {
       id: Date.now(),
       title: text,
-      time,
     },
   };
   mainArray.push(task);
@@ -82,8 +78,12 @@ function addTasksToPageFrom(mainArray) {
   });
   mainArray.forEach((task) => {
     let item = document.createElement("div");
+    let time = new Date(task.content.id);
     item.className = "item";
-    item.setAttribute("data-time", task.content.time);
+    item.setAttribute(
+      "data-time",
+      `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`
+    );
     item.setAttribute("data-id", task.content.id);
     item.setAttribute("draggable", true);
     item.innerHTML = `<div class="item-input" >${task.content.title}</div>
@@ -204,3 +204,52 @@ function dragItemWith(dragId, columnId) {
   });
   addDataToLocalStorgeFrom(mainArray);
 }
+
+// function dragItem() {
+//   let items = document.querySelectorAll(".item");
+//   items.forEach((item) => {
+//     item.addEventListener("dragstart", (e) => {
+//       e.dataTransfer.setData("text/plain", item.getAttribute("data-id"));
+//       e.dataTransfer.effectAllowed = "move";
+//       item.style.opacity = "0.5";
+//       item.lastElementChild.style.display = "none ";
+//     });
+//     item.addEventListener("dragend", (_) => {
+//       // drag = null;
+//       item.style.opacity = "1";
+//       item.lastElementChild.style.display = "block";
+//     });
+
+//     columns.forEach((column) => {
+//       // column.addEventListener("dragenter", (e) => {
+//       //   e.preventDefault();
+//       // });
+//       column.addEventListener("dragover", (e) => {
+//         e.preventDefault();
+//         column.style.boxShadow = " 0px 0px 15px #8BF5FA";
+//       });
+//       column.addEventListener("dragleave", (_) => {
+//         column.removeAttribute("style");
+//       });
+//       column.addEventListener("drop", (e) => {
+//         // if (e.dataTransfer.types[0] === "text/plain") {
+//         // column.firstElementChild.nextElementSibling.appendChild(drag);
+//         dragItemWith(e.dataTransfer.getData("text/plain"), column.id);
+//         console.log(e.dataTransfer.getData("text/plain"), column.id);
+//         // }
+//         column.removeAttribute("style");
+//       });
+//     });
+//   });
+// }
+
+// function dragItemWith(taskId, columnId) {
+//   mainArray = mainArray.map((task) => {
+//     if (task.content.id == taskId) {
+//       task.id = columnId;
+//     }
+//     return task;
+//   });
+//   // addTasksToPageFrom(mainArray);
+//   addDataToLocalStorgeFrom(mainArray);
+// }
