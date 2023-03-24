@@ -15,6 +15,11 @@ if (localStorage.getItem("tasks")) {
 
 getDataFromLoacalStorge();
 
+/*
++========+
+| Input |
++=======+
+*/
 function addItems(e) {
   let listItems = e.target.previousElementSibling;
   let itemInput = listItems.querySelectorAll(".item-input");
@@ -26,11 +31,14 @@ function addItems(e) {
     `;
     listItems.appendChild(item);
     save(item);
-  } else {
-    // Add Message to user
   }
 }
 
+/*
++================+
+| Parse   Input  |
++================+
+*/
 function save(item) {
   let input = item.firstElementChild;
   let btn = item.parentElement.nextElementSibling;
@@ -44,15 +52,9 @@ function save(item) {
     if (item.textContent.trim() != "") {
       addTaskToArray(item);
       item.remove();
-      // btn.click();
       return;
     } else {
       item.remove();
-      // item.firstElementChild.innerHTML =
-      //   "<small class='message'>Empty task</small>";
-      // setTimeout(() => {
-      //   item.remove();
-      // }, 400);
     }
   });
 }
@@ -147,11 +149,21 @@ function getDataFromLoacalStorge() {
   }
 }
 
+/*
++================+
+|  Delete  Task  |
++================+
+*/
 function deleteTaskWith(taskId) {
   mainArray = mainArray.filter((task) => task.content.id != taskId);
   addDataToLocalStorgeFrom(mainArray);
 }
 
+/*
++================+
+|  Edit    Task  |
++================+
+*/
 function editTaskWith(taskId, input) {
   mainArray = mainArray.map((task) => {
     if (task.content.id == taskId) {
@@ -163,6 +175,11 @@ function editTaskWith(taskId, input) {
   addDataToLocalStorgeFrom(mainArray);
 }
 
+/*
++================+
+|  Drag And Drop |
++================+
+*/
 function dragItem() {
   let items = document.querySelectorAll(".item");
   items.forEach((item) => {
@@ -176,8 +193,6 @@ function dragItem() {
       item.style.opacity = "1";
       item.lastElementChild.style.display = "block";
     });
-
-    ///////////////////////////////////
 
     item.addEventListener("touchmove", (e) => {
       e.preventDefault();
@@ -207,10 +222,13 @@ function dragItem() {
         });
       }
     });
-
+    /*
++================+
+|  Touch Events  |
++================+
+*/
     item.addEventListener("touchend", (e) => {
       item.style.opacity = "1";
-      // if (item.parentElement.getBoundingClientRect().width > 230) {
       columns.forEach((column) => {
         if (
           column.getBoundingClientRect().top <
@@ -230,12 +248,7 @@ function dragItem() {
         }
       });
       item.style.cssText = "position : relative; top: 0; left: 0";
-      // } else {
-      ////
-      // }
     });
-
-    ///////////////////////////////////
 
     columns.forEach((column) => {
       column.addEventListener("dragover", (e) => {
@@ -256,6 +269,11 @@ function dragItem() {
   });
 }
 
+/*
++================+
+|  Move Task To  |
++================+
+*/
 function dragItemWith(dragId, columnId) {
   mainArray = mainArray.map((task) => {
     if (task.content.id == dragId) {
@@ -266,6 +284,11 @@ function dragItemWith(dragId, columnId) {
   addDataToLocalStorgeFrom(mainArray);
 }
 
+/*
++================+
+|  Time And Date |
++================+
+*/
 let inProgress = columns[0].lastElementChild.previousElementSibling.childNodes;
 let completed = columns[2].lastElementChild.previousElementSibling.childNodes;
 
@@ -304,4 +327,4 @@ setTimeout(() => {
 setInterval(() => {
   time();
   date();
-}, 0);
+}, 1000);
