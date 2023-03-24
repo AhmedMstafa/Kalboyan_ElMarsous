@@ -80,8 +80,10 @@ function addTasksToPageFrom(mainArray) {
     let item = document.createElement("div");
     let time = new Date(task.content.id);
     item.className = "item";
+    item.setAttribute("data-not", "");
+    item.setAttribute("data-completed", "");
     item.setAttribute(
-      "data-time",
+      "data-in",
       `${time.getDate()}-${time.getMonth() + 1}-${time.getFullYear()}`
     );
     item.setAttribute("data-id", task.content.id);
@@ -263,3 +265,43 @@ function dragItemWith(dragId, columnId) {
   });
   addDataToLocalStorgeFrom(mainArray);
 }
+
+let inProgress = columns[0].lastElementChild.previousElementSibling.childNodes;
+let completed = columns[2].lastElementChild.previousElementSibling.childNodes;
+
+function time() {
+  inProgress.forEach((item) => {
+    let date = new Date(Date.now());
+    let hour = date.getHours();
+    let apm = "AM";
+    if (hour > 12) {
+      hour = hour - 12;
+      apm = "PM";
+    }
+
+    minutes = date.getMinutes();
+
+    let timeNow = `${hour}:${minutes} ${apm}`;
+    item.dataset.not = timeNow;
+  });
+}
+
+function date() {
+  completed.forEach((item) => {
+    let date = new Date(Date.now());
+    let timeNow = `${date.getDate()}-${
+      date.getMonth() + 1
+    }-${date.getFullYear()}`;
+    item.dataset.completed = timeNow;
+  });
+}
+
+setTimeout(() => {
+  time();
+  date();
+}, 0);
+
+setInterval(() => {
+  time();
+  date();
+}, 0);
