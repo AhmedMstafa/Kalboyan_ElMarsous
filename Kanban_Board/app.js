@@ -174,6 +174,7 @@ function dragItem() {
       item.style.opacity = "1";
       item.lastElementChild.style.display = "block";
     });
+
     ///////////////////////////////////
 
     item.addEventListener("touchmove", (e) => {
@@ -219,21 +220,21 @@ function dragItem() {
             column.firstElementChild.nextElementSibling.appendChild(drag);
             dragItemWith(drag.getAttribute("data-id"), column.id);
           }
-          item.style.position = "relative";
-          item.style.top = "0";
-          item.style.left = "0";
+          item.style.cssText = "position : relative; top: 0; left: 0";
           drag = null;
           column.removeAttribute("style");
         } else {
-          ////
+          ///
         }
       });
+      item.style.cssText = "position : relative; top: 0; left: 0";
       // } else {
       ////
       // }
     });
 
     ///////////////////////////////////
+
     columns.forEach((column) => {
       column.addEventListener("dragover", (e) => {
         e.preventDefault();
@@ -262,30 +263,3 @@ function dragItemWith(dragId, columnId) {
   });
   addDataToLocalStorgeFrom(mainArray);
 }
-
-// document.addEventListener("touchstart", (e) => {
-//   e.preventDefault();
-//   [...e.changedTouches].forEach((touch) => {
-//     const dot = document.createElement("div");
-//     dot.classList.add("dot");
-//     dot.style.top = `${touch.pageY + 20}px`;
-//     dot.style.left = `${touch.pageX + 21}px`;
-//     dot.id = touch.identifier + 10;
-//     document.body.append(dot);
-//   });
-// });
-
-// document.addEventListener("touchmove", (e) => {
-//   // e.preventDefault();
-//   [...e.changedTouches].forEach((touch) => {
-//     const dot = document.getElementById(touch.identifier + 10);
-//     dot.style.top = `${touch.pageY + 20}px`;
-//     dot.style.left = `${touch.pageX + 21}px`;
-//   });
-// });
-// document.addEventListener("touchend", (e) => {
-//   [...e.changedTouches].forEach((touch) => {
-//     const dot = document.getElementById(touch.identifier + 10);
-//     dot.remove();
-//   });
-// });
