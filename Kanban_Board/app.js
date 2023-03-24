@@ -164,8 +164,21 @@ function editTaskWith(taskId, input) {
 function dragItem() {
   let items = document.querySelectorAll(".item");
   items.forEach((item) => {
+    item.addEventListener("dragstart", (_) => {
+      drag = item;
+      item.style.opacity = "0.5";
+      item.lastElementChild.style.display = "none ";
+    });
+    item.addEventListener("dragend", (_) => {
+      drag = null;
+      item.style.opacity = "1";
+      item.lastElementChild.style.display = "block";
+    });
+    ///////////////////////////////////
+
     item.addEventListener("touchmove", (e) => {
       e.preventDefault();
+      drag = item;
       [...e.changedTouches].forEach((touch) => {
         item.style.position = "absolute";
         item.style.top = `${
@@ -176,33 +189,6 @@ function dragItem() {
         }px`;
         item.style.opacity = "0.5";
       });
-    });
-    item.addEventListener("touchend", (e) => {
-      // e, preventDefault();
-      [...e.changedTouches].forEach((touch) => {
-        item.style.opacity = "1";
-        if (item.parentElement.getBoundingClientRect().width > 230) {
-          columns.forEach((column) => {
-            if (
-              column.getBoundingClientRect().top <
-                item.getBoundingClientRect().top &&
-              item.getBoundingClientRect().bottom <
-                column.getBoundingClientRect().bottom
-            ) {
-              column.removeAttribute("style");
-              console.log(column.id);
-              column.firstElementChild.nextElementSibling.appendChild(drag);
-              dragItemWith(drag.getAttribute("data-id"), column.id);
-            } else {
-              ////
-            }
-          });
-        } else {
-          ////
-        }
-      });
-    });
-    item.addEventListener("touchmove", (e) => {
       if (item.parentElement.getBoundingClientRect().width > 230) {
         columns.forEach((column) => {
           if (
@@ -212,26 +198,42 @@ function dragItem() {
               column.getBoundingClientRect().bottom
           ) {
             column.style.boxShadow = " 0px 0px 15px #8BF5FA";
-            // column.firstElementChild.nextElementSibling.appendChild(drag);
-            // dragItemWith(drag.getAttribute("data-id"), column.id);
           } else {
             column.removeAttribute("style");
           }
         });
       }
     });
-    item.addEventListener("dragstart", (_) => {
-      drag = item;
 
-      item.style.opacity = "0.5";
-      item.lastElementChild.style.display = "none ";
-    });
-    item.addEventListener("dragend", (_) => {
-      drag = null;
+    item.addEventListener("touchend", (e) => {
       item.style.opacity = "1";
-      item.lastElementChild.style.display = "block";
+      // if (item.parentElement.getBoundingClientRect().width > 230) {
+      columns.forEach((column) => {
+        if (
+          column.getBoundingClientRect().top <
+            item.getBoundingClientRect().top &&
+          item.getBoundingClientRect().bottom <
+            column.getBoundingClientRect().bottom
+        ) {
+          if (drag) {
+            column.firstElementChild.nextElementSibling.appendChild(drag);
+            dragItemWith(drag.getAttribute("data-id"), column.id);
+          }
+          item.style.position = "relative";
+          item.style.top = "0";
+          item.style.left = "0";
+          drag = null;
+          column.removeAttribute("style");
+        } else {
+          ////
+        }
+      });
+      // } else {
+      ////
+      // }
     });
 
+    ///////////////////////////////////
     columns.forEach((column) => {
       column.addEventListener("dragover", (e) => {
         e.preventDefault();
