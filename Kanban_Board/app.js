@@ -164,6 +164,62 @@ function editTaskWith(taskId, input) {
 function dragItem() {
   let items = document.querySelectorAll(".item");
   items.forEach((item) => {
+    item.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      [...e.changedTouches].forEach((touch) => {
+        item.style.position = "absolute";
+        item.style.top = `${
+          touch.pageY - item.getBoundingClientRect().height / 2 - 25
+        }px`;
+        item.style.left = `${
+          touch.pageX - item.getBoundingClientRect().width / 2
+        }px`;
+        item.style.opacity = "0.5";
+      });
+    });
+    item.addEventListener("touchend", (e) => {
+      // e, preventDefault();
+      [...e.changedTouches].forEach((touch) => {
+        item.style.opacity = "1";
+        if (item.parentElement.getBoundingClientRect().width > 230) {
+          columns.forEach((column) => {
+            if (
+              column.getBoundingClientRect().top <
+                item.getBoundingClientRect().top &&
+              item.getBoundingClientRect().bottom <
+                column.getBoundingClientRect().bottom
+            ) {
+              column.removeAttribute("style");
+              console.log(column.id);
+              column.firstElementChild.nextElementSibling.appendChild(drag);
+              dragItemWith(drag.getAttribute("data-id"), column.id);
+            } else {
+              ////
+            }
+          });
+        } else {
+          ////
+        }
+      });
+    });
+    item.addEventListener("touchmove", (e) => {
+      if (item.parentElement.getBoundingClientRect().width > 230) {
+        columns.forEach((column) => {
+          if (
+            column.getBoundingClientRect().top <
+              item.getBoundingClientRect().top &&
+            item.getBoundingClientRect().bottom <
+              column.getBoundingClientRect().bottom
+          ) {
+            column.style.boxShadow = " 0px 0px 15px #8BF5FA";
+            // column.firstElementChild.nextElementSibling.appendChild(drag);
+            // dragItemWith(drag.getAttribute("data-id"), column.id);
+          } else {
+            column.removeAttribute("style");
+          }
+        });
+      }
+    });
     item.addEventListener("dragstart", (_) => {
       drag = item;
 
@@ -205,51 +261,29 @@ function dragItemWith(dragId, columnId) {
   addDataToLocalStorgeFrom(mainArray);
 }
 
-// function dragItem() {
-//   let items = document.querySelectorAll(".item");
-//   items.forEach((item) => {
-//     item.addEventListener("dragstart", (e) => {
-//       e.dataTransfer.setData("text/plain", item.getAttribute("data-id"));
-//       e.dataTransfer.effectAllowed = "move";
-//       item.style.opacity = "0.5";
-//       item.lastElementChild.style.display = "none ";
-//     });
-//     item.addEventListener("dragend", (_) => {
-//       // drag = null;
-//       item.style.opacity = "1";
-//       item.lastElementChild.style.display = "block";
-//     });
-
-//     columns.forEach((column) => {
-//       // column.addEventListener("dragenter", (e) => {
-//       //   e.preventDefault();
-//       // });
-//       column.addEventListener("dragover", (e) => {
-//         e.preventDefault();
-//         column.style.boxShadow = " 0px 0px 15px #8BF5FA";
-//       });
-//       column.addEventListener("dragleave", (_) => {
-//         column.removeAttribute("style");
-//       });
-//       column.addEventListener("drop", (e) => {
-//         // if (e.dataTransfer.types[0] === "text/plain") {
-//         // column.firstElementChild.nextElementSibling.appendChild(drag);
-//         dragItemWith(e.dataTransfer.getData("text/plain"), column.id);
-//         console.log(e.dataTransfer.getData("text/plain"), column.id);
-//         // }
-//         column.removeAttribute("style");
-//       });
-//     });
+// document.addEventListener("touchstart", (e) => {
+//   e.preventDefault();
+//   [...e.changedTouches].forEach((touch) => {
+//     const dot = document.createElement("div");
+//     dot.classList.add("dot");
+//     dot.style.top = `${touch.pageY + 20}px`;
+//     dot.style.left = `${touch.pageX + 21}px`;
+//     dot.id = touch.identifier + 10;
+//     document.body.append(dot);
 //   });
-// }
+// });
 
-// function dragItemWith(taskId, columnId) {
-//   mainArray = mainArray.map((task) => {
-//     if (task.content.id == taskId) {
-//       task.id = columnId;
-//     }
-//     return task;
+// document.addEventListener("touchmove", (e) => {
+//   // e.preventDefault();
+//   [...e.changedTouches].forEach((touch) => {
+//     const dot = document.getElementById(touch.identifier + 10);
+//     dot.style.top = `${touch.pageY + 20}px`;
+//     dot.style.left = `${touch.pageX + 21}px`;
 //   });
-//   // addTasksToPageFrom(mainArray);
-//   addDataToLocalStorgeFrom(mainArray);
-// }
+// });
+// document.addEventListener("touchend", (e) => {
+//   [...e.changedTouches].forEach((touch) => {
+//     const dot = document.getElementById(touch.identifier + 10);
+//     dot.remove();
+//   });
+// });
