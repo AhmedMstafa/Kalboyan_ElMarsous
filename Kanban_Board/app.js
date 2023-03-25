@@ -126,6 +126,11 @@ function edit(item) {
     itemInput.setAttribute("contenteditable", "");
     itemInput.focus();
   });
+  itemInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      itemInput.blur();
+    }
+  });
   itemInput.addEventListener("blur", (_) => {
     if (itemInput.textContent == "") {
       item.remove();
@@ -311,11 +316,13 @@ function time() {
 
 function date() {
   completed.forEach((item) => {
-    let date = new Date(Date.now());
-    let timeNow = `${date.getDate()}-${
-      date.getMonth() + 1
-    }-${date.getFullYear()}`;
-    item.dataset.completed = timeNow;
+    if (item.dataset.completed == "") {
+      let date = new Date(Date.now());
+      let timeNow = `${date.getDate()}-${
+        date.getMonth() + 1
+      }-${date.getFullYear()}`;
+      item.dataset.completed = timeNow;
+    }
   });
 }
 
