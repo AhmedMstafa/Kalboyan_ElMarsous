@@ -299,29 +299,33 @@ let completed = columns[2].lastElementChild.previousElementSibling.childNodes;
 
 function time() {
   inProgress.forEach((item) => {
-    let date = new Date(Date.now());
-    let hour = date.getHours();
-    let apm = "AM";
-    if (hour > 12) {
-      hour = hour - 12;
-      apm = "PM";
+    if (item.className != "item input") {
+      let date = new Date(Date.now());
+      let hour = date.getHours();
+      let apm = "AM";
+      if (hour > 12) {
+        hour = hour - 12;
+        apm = "PM";
+      }
+
+      minutes = date.getMinutes();
+
+      let timeNow = `${hour}:${minutes} ${apm}`;
+      item.dataset.not = timeNow;
     }
-
-    minutes = date.getMinutes();
-
-    let timeNow = `${hour}:${minutes} ${apm}`;
-    item.dataset.not = timeNow;
   });
 }
 
 function date() {
   completed.forEach((item) => {
     if (item.dataset.completed == "") {
-      let date = new Date(Date.now());
-      let timeNow = `${date.getDate()}-${
-        date.getMonth() + 1
-      }-${date.getFullYear()}`;
-      item.dataset.completed = timeNow;
+      if (item.className != "item input") {
+        let date = new Date(Date.now());
+        let timeNow = `${date.getDate()}-${
+          date.getMonth() + 1
+        }-${date.getFullYear()}`;
+        item.dataset.completed = timeNow;
+      }
     }
   });
 }
